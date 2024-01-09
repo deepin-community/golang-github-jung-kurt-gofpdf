@@ -1,4 +1,16 @@
 #!/usr/bin/make -f
 
+export DH_GOLANG_EXCLUDES := list makefont internal/files/bin
+export DH_GOLANG_INSTALL_EXTRA := $(wildcard image/* font/* text/*) pdf/reference LICENSE
+
 %:
-	dh $@
+	dh $@ --builddirectory=_build --buildsystem=golang --with=golang
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	# check whether Nilesh's patch had worked and internal/files is excluded:
+	find . -name fpdf_test.go -exec grep -H 'internal/files' \{\} \;
+	# Try to copy everything to build dir
+	cp -a internal/files _build/src/github.com/jung-kurt/gofpdf/internal
+	dh_auto_test
+endif

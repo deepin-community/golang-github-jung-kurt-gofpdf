@@ -1,0 +1,210 @@
+Author: Nilesh Patra <npatra974@gmail.com>
+Description: Remove tests needing ttf binary files / other non-free binaries - these binaries need to be removed and hence cannot be used for testing.
+Last Changed: July 22, 01:11
+--- a/fpdf_test.go
++++ b/fpdf_test.go
+@@ -24,7 +24,6 @@
+ 	"io/ioutil"
+ 	"math"
+ 	"math/rand"
+-	"net/http"
+ 	"os"
+ 	"path/filepath"
+ 	"strconv"
+@@ -34,7 +33,6 @@
+ 
+ 	"github.com/jung-kurt/gofpdf/v2"
+ 	"github.com/jung-kurt/gofpdf/v2/internal/example"
+-	"github.com/jung-kurt/gofpdf/v2/internal/files"
+ )
+ 
+ func init() {
+@@ -774,6 +772,7 @@
+ 	// Successfully generated pdf/Fpdf_HTMLBasicNew.pdf
+ }
+ 
++/*
+ // ExampleFpdf_AddFont demonstrates the use of a non-standard font.
+ func ExampleFpdf_AddFont() {
+ 	pdf := gofpdf.New("P", "mm", "A4", example.FontDir())
+@@ -787,6 +786,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_AddFont.pdf
+ }
++*/
+ 
+ // ExampleFpdf_WriteAligned demonstrates how to align text with the Write function.
+ func ExampleFpdf_WriteAligned() {
+@@ -948,6 +948,7 @@
+ 	// Successfully generated pdf/Fpdf_SetAcceptPageBreakFunc_landscape.pdf
+ }
+ 
++/*
+ // This example tests corner cases as reported by the gocov tool.
+ func ExampleFpdf_SetKeywords() {
+ 	var err error
+@@ -972,6 +973,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_SetKeywords.pdf
+ }
++*/
+ 
+ // ExampleFpdf_Circle demonstrates the construction of various geometric figures,
+ func ExampleFpdf_Circle() {
+@@ -1534,6 +1536,7 @@
+ 	// Successfully generated pdf/Fpdf_SVGBasicWrite.pdf
+ }
+ 
++/*
+ // ExampleFpdf_CellFormat_align demonstrates Stefan Schroeder's code to control vertical
+ // alignment.
+ func ExampleFpdf_CellFormat_align() {
+@@ -1588,6 +1591,7 @@
+ 	// Generalized font loader reading calligra.z
+ 	// Successfully generated pdf/Fpdf_CellFormat_align.pdf
+ }
++*/
+ 
+ // ExampleFpdf_CellFormat_codepageescape demonstrates the use of characters in the high range of the
+ // Windows-1252 code page (gofdpf default). See the example for CellFormat (4)
+@@ -1623,6 +1627,7 @@
+ 
+ // ExampleFpdf_CellFormat_codepage demonstrates the automatic conversion of UTF-8 strings to an
+ // 8-bit font encoding.
++/*
+ func ExampleFpdf_CellFormat_codepage() {
+ 	pdf := gofpdf.New("P", "mm", "A4", example.FontDir()) // A4 210.0 x 297.0
+ 	// See documentation for details on how to generate fonts
+@@ -1662,6 +1667,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_CellFormat_codepage.pdf
+ }
++*/
+ 
+ // ExampleFpdf_SetProtection demonstrates password protection for documents.
+ func ExampleFpdf_SetProtection() {
+@@ -1769,6 +1775,7 @@
+ 
+ // ExampleFpdf_RegisterImageReader demonstrates the use of an image that is retrieved from a web
+ // server.
++/*
+ func ExampleFpdf_RegisterImageReader() {
+ 
+ 	const (
+@@ -1810,6 +1817,7 @@
+ 	// Successfully generated pdf/Fpdf_RegisterImageReader_url.pdf
+ 
+ }
++*/
+ 
+ // ExampleFpdf_Beziergon demonstrates the Beziergon function.
+ func ExampleFpdf_Beziergon() {
+@@ -1900,6 +1908,7 @@
+ 
+ }
+ 
++/*
+ // ExampleFpdf_SetFontLoader demonstrates loading a non-standard font using a generalized
+ // font loader. fontResourceType implements the FontLoader interface and is
+ // defined locally in the test source code.
+@@ -1919,6 +1928,7 @@
+ 	// Generalized font loader reading calligra.z
+ 	// Successfully generated pdf/Fpdf_SetFontLoader.pdf
+ }
++*/
+ 
+ // ExampleFpdf_MoveTo demonstrates the Path Drawing functions, such as: MoveTo,
+ // LineTo, CurveTo, ..., ClosePath and DrawPath.
+@@ -2115,6 +2125,7 @@
+ 	// Successfully generated pdf/Fpdf_CreateTemplate.pdf
+ }
+ 
++/*
+ // ExampleFpdf_AddFontFromBytes demonstrate how to use embedded fonts from byte array
+ func ExampleFpdf_AddFontFromBytes() {
+ 	pdf := gofpdf.New("P", "mm", "A4", "")
+@@ -2128,6 +2139,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_EmbeddedFont.pdf
+ }
++*/
+ 
+ // This example demonstrate Clipped table cells
+ func ExampleFpdf_ClipRect() {
+@@ -2286,6 +2298,7 @@
+ // ExampleFpdf_RegisterAlias_utf8 demonstrates how to use `RegisterAlias` to
+ // create a table of contents. This particular example demonstrates the use of
+ // UTF-8 aliases.
++/*
+ func ExampleFpdf_RegisterAlias_utf8() {
+ 	pdf := gofpdf.New("P", "mm", "A4", "")
+ 	pdf.AddUTF8Font("dejavu", "", example.FontFile("DejaVuSansCondensed.ttf"))
+@@ -2316,6 +2329,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_RegisterAliasUTF8.pdf
+ }
++*/
+ 
+ // ExampleNewGrid demonstrates the generation of graph grids.
+ func ExampleNewGrid() {
+@@ -2598,6 +2612,7 @@
+ 
+ // ExampleFpdf_AddUTF8Font demonstrates how use the font
+ // with utf-8 mode
++/*
+ func ExampleFpdf_AddUTF8Font() {
+ 	var fileStr string
+ 	var txtStr []byte
+@@ -2606,16 +2621,13 @@
+ 	pdf := gofpdf.New("P", "mm", "A4", "")
+ 
+ 	pdf.AddPage()
+-
+ 	pdf.AddUTF8Font("dejavu", "", example.FontFile("DejaVuSansCondensed.ttf"))
+ 	pdf.AddUTF8Font("dejavu", "B", example.FontFile("DejaVuSansCondensed-Bold.ttf"))
+ 	pdf.AddUTF8Font("dejavu", "I", example.FontFile("DejaVuSansCondensed-Oblique.ttf"))
+-	pdf.AddUTF8Font("dejavu", "BI", example.FontFile("DejaVuSansCondensed-BoldOblique.ttf"))
+ 
+ 	fileStr = example.Filename("Fpdf_AddUTF8Font")
+ 	txtStr, err = ioutil.ReadFile(example.TextFile("utf-8test.txt"))
+ 	if err == nil {
+-
+ 		pdf.SetFont("dejavu", "B", 17)
+ 		pdf.MultiCell(100, 8, "Text in different languages :", "", "C", false)
+ 		pdf.SetFont("dejavu", "", 14)
+@@ -2637,7 +2649,9 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_AddUTF8Font.pdf
+ }
++*/
+ 
++/*
+ // ExampleUTF8CutFont demonstrates how generate a TrueType font subset.
+ func ExampleUTF8CutFont() {
+ 	var pdfFileStr, fullFontFileStr, subFontFileStr string
+@@ -2685,6 +2699,7 @@
+ 	// Output:
+ 	// Successfully generated pdf/Fpdf_UTF8CutFont.pdf
+ }
++*/
+ 
+ func ExampleFpdf_RoundedRect() {
+ 	const (
+--- a/ttfparser_test.go
++++ b/ttfparser_test.go
+@@ -24,6 +24,7 @@
+ 	"github.com/jung-kurt/gofpdf/v2/internal/example"
+ )
+ 
++/*
+ func ExampleTtfParse() {
+ 	ttf, err := gofpdf.TtfParse(example.FontDir() + "/calligra.ttf")
+ 	if err == nil {
+@@ -44,6 +45,7 @@
+ 	// Xmax:                 1328
+ 	// Ymax:                  899
+ }
++*/
+ 
+ func hexStr(s string) string {
+ 	var b bytes.Buffer
